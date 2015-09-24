@@ -154,11 +154,9 @@ build/default/production/_ext/1688732426/system_tasks.o:  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/list.h  \
- ../src/app.h  \
+ ../src/app_wifly.h  \
 ../src/system_config/default/system_definitions.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../src/debug.h  \
-../src/timer.h  \
-../src/app1_public.h 
+ ../src/app_wifly_public.h 

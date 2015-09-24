@@ -68,6 +68,13 @@ void DRV_USART0_Initialize(void)
     PLIB_USART_LineControlModeSelect(USART_ID_2, USART_8N1);
     PLIB_USART_TransmitterEnable(USART_ID_2);
     PLIB_USART_TransmitterInterruptModeSelect(USART_ID_2, USART_TRANSMIT_FIFO_NOT_FULL);
+    /* Initialize interrupts */
+    /* Note: TX interrupt must be enabled when data is ready to be transmitted */
+    /* The following code can be used to enable TX Interrupt */
+    /* PLIB_INT_SourceEnable(INT_ID_0, INT_SOURCE_USART_2_TRANSMIT); */
+    PLIB_INT_SourceEnable(INT_ID_0, INT_SOURCE_USART_2_ERROR);
+    PLIB_INT_VectorPrioritySet(INT_ID_0, INT_VECTOR_UART2, INT_PRIORITY_LEVEL1);
+    PLIB_INT_VectorSubPrioritySet(INT_ID_0, INT_VECTOR_UART2, INT_SUBPRIORITY_LEVEL0);
 
     PLIB_USART_Enable(USART_ID_2);
 }
@@ -80,6 +87,59 @@ void DRV_USART0_WriteByte(const uint8_t byte)
    }
 
    PLIB_USART_TransmitterByteSend(USART_ID_2, byte);
+}
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Instance 1 static driver functions
+// *****************************************************************************
+// *****************************************************************************
+
+void DRV_USART1_Initialize(void)
+{
+    /* Initialize USART */
+    PLIB_USART_BaudRateSet(USART_ID_1, SYS_CLK_PeripheralFrequencyGet(CLK_BUS_PERIPHERAL_1), 9600);
+    PLIB_USART_HandshakeModeSelect(USART_ID_1, USART_HANDSHAKE_MODE_SIMPLEX);
+    PLIB_USART_OperationModeSelect(USART_ID_1, USART_ENABLE_TX_RX_USED);
+    PLIB_USART_LineControlModeSelect(USART_ID_1, USART_8N1);
+    PLIB_USART_TransmitterEnable(USART_ID_1);
+    PLIB_USART_TransmitterInterruptModeSelect(USART_ID_1, USART_TRANSMIT_FIFO_NOT_FULL);
+    PLIB_USART_ReceiverEnable(USART_ID_1);
+    PLIB_USART_ReceiverInterruptModeSelect(USART_ID_1, USART_RECEIVE_FIFO_ONE_CHAR);
+    /* Initialize interrupts */
+    /* Note: TX interrupt must be enabled when data is ready to be transmitted */
+    /* The following code can be used to enable TX Interrupt */
+    /* PLIB_INT_SourceEnable(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT); */
+    PLIB_INT_SourceEnable(INT_ID_0, INT_SOURCE_USART_1_RECEIVE);
+    PLIB_INT_SourceEnable(INT_ID_0, INT_SOURCE_USART_1_ERROR);
+    PLIB_INT_VectorPrioritySet(INT_ID_0, INT_VECTOR_UART1, INT_PRIORITY_LEVEL2);
+    PLIB_INT_VectorSubPrioritySet(INT_ID_0, INT_VECTOR_UART1, INT_SUBPRIORITY_LEVEL0);
+
+    PLIB_USART_Enable(USART_ID_1);
+}
+
+bool DRV_USART1_ReceiverBufferIsEmpty(void)
+{
+   return (!PLIB_USART_ReceiverDataIsAvailable(USART_ID_1));
+}
+
+uint8_t DRV_USART1_ReadByte(void)
+{
+   if(PLIB_USART_ReceiverOverrunHasOccurred(USART_ID_1))
+   {
+      PLIB_USART_ReceiverOverrunErrorClear(USART_ID_1);
+   }
+
+   return (PLIB_USART_ReceiverByteReceive(USART_ID_1));
+}
+
+void DRV_USART1_WriteByte(const uint8_t byte)
+{
+   while(PLIB_USART_TransmitterBufferIsFull(USART_ID_1))
+   {
+   }
+
+   PLIB_USART_TransmitterByteSend(USART_ID_1, byte);
 }
 
 

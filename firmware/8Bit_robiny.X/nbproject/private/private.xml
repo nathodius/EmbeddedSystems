@@ -4,12 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/tasks.c</file>
-            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/debug.c</file>
-            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/main.c</file>
-            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/app.c</file>
-            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/system_config/default/framework/driver/usart/drv_usart_static.c</file>
-            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/debug.h</file>
-            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/app.h</file>
+            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/system_config/default/system_interrupt.c</file>
+            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/system_config/default/system_exceptions.c</file>
+            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/app_wifly.c</file>
+            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/app_wifly.h</file>
+            <file>file:/C:/microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/queue.h</file>
+            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/app_wifly_public.h</file>
+            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/8Bit_robiny.X/nbproject/Makefile-default.mk</file>
         </group>
     </open-files>
 </project-private>

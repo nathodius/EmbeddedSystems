@@ -4,6 +4,11 @@
  *
  * Created on September 17, 2015, 8:26 AM
  */
+
+
+#ifndef APP1_PUBLIC_H
+#define	APP1_PUBLIC_H
+
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -12,9 +17,6 @@
 #include "system_definitions.h"
 #include "FreeRTOS.h"
 #include "timers.h"
-
-#ifndef APP1_PUBLIC_H
-#define	APP1_PUBLIC_H
 
 #ifdef	__cplusplus
 extern "C" {
