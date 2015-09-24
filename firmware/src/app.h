@@ -61,7 +61,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "FreeRTOS.h"
 #include "timers.h"
 #include "queue.h"
-#include "debug.h"
 #include "timer.h"
 
 // *****************************************************************************

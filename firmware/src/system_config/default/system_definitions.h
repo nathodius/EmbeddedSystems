@@ -59,6 +59,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system/console/sys_console.h"
 #include "driver/usart/drv_usart_static.h"
 #include "peripheral/usart/plib_usart.h"
+#include "peripheral/int/plib_int.h"
 #include "system/ports/sys_ports.h"
 #include "system/debug/sys_debug.h"
 #include "system/command/sys_command.h"
@@ -66,7 +67,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "FreeRTOS.h"
 #include "task.h"
-#include "app.h"
+#include "app_wifly.h"
 
 
 // *****************************************************************************

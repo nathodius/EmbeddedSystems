@@ -182,6 +182,7 @@ void SYS_Initialize ( void* data )
 
     /* Initialize Drivers */
     DRV_USART0_Initialize();
+    DRV_USART1_Initialize();
 
     /* Initialize System Services */
     SYS_INT_Initialize();  
@@ -189,7 +190,7 @@ void SYS_Initialize ( void* data )
     /* Initialize Middleware */
 
     /* Initialize the Application */
-    APP_Initialize();
+    APP_WIFLY_Initialize();
 }
 
 

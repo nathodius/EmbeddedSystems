@@ -15,16 +15,16 @@
         <Path>Header Files/FreeRTOS</Path>
       </File>
       <File>
-        <Name>projdefs.h</Name>
-        <Path>Header Files/FreeRTOS</Path>
+        <Name>sys_common.h</Name>
+        <Path>Header Files/framework/system/common</Path>
       </File>
       <File>
         <Name>list.c</Name>
         <Path>Source Files/FreeRTOS</Path>
       </File>
       <File>
-        <Name>sys_common.h</Name>
-        <Path>Header Files/framework/system/common</Path>
+        <Name>projdefs.h</Name>
+        <Path>Header Files/FreeRTOS</Path>
       </File>
       <File>
         <Name>portable.h</Name>
@@ -39,16 +39,16 @@
         <Path>Source Files/framework/system/ports/src</Path>
       </File>
       <File>
-        <Name>ISR_Support.h</Name>
-        <Path>Header Files/FreeRTOS/portable/MPLAB/PIC32MX</Path>
+        <Name>tasks.c</Name>
+        <Path>Source Files/FreeRTOS</Path>
       </File>
       <File>
         <Name>port.c</Name>
         <Path>Source Files/FreeRTOS/portable/MPLAB/PIC32MX</Path>
       </File>
       <File>
-        <Name>tasks.c</Name>
-        <Path>Source Files/FreeRTOS</Path>
+        <Name>ISR_Support.h</Name>
+        <Path>Header Files/FreeRTOS/portable/MPLAB/PIC32MX</Path>
       </File>
       <File>
         <Name>event_groups.c</Name>
@@ -123,12 +123,12 @@
         <Path>Source Files/FreeRTOS/portable/MemMang</Path>
       </File>
       <File>
-        <Name>FreeRTOS.h</Name>
-        <Path>Header Files/FreeRTOS</Path>
-      </File>
-      <File>
         <Name>sys_int_pic32.c</Name>
         <Path>Source Files/framework/system/int/src</Path>
+      </File>
+      <File>
+        <Name>FreeRTOS.h</Name>
+        <Path>Header Files/FreeRTOS</Path>
       </File>
       <File>
         <Name>sys_devcon_pic32mx.c</Name>
@@ -166,12 +166,16 @@
       <Template>
         <Name>drv_usart_static.h</Name>
         <Path>Header Files/app/system_config/default/framework/driver/usart</Path>
-        <Checksum>8A3F63ECE7EDDAD4087E52654104CD6E</Checksum>
+        <Checksum>669225D396341B82A10C79ADF6FE4C2B</Checksum>
+      </Template>
+      <Template>
+        <Name>app_wifly.c</Name>
+        <Path>Source Files/app</Path>
       </Template>
       <Template>
         <Name>system_interrupt.c</Name>
         <Path>Source Files/app/system_config/default</Path>
-        <Checksum>9AC33B2960C8DF72C5EB0E3662303FF4</Checksum>
+        <Checksum>B54715AC9F865179792D898171527612</Checksum>
       </Template>
       <Template>
         <Name>sys_ports_static.c</Name>
@@ -184,13 +188,13 @@
         <Checksum>999179DADE9ECD59953526F5E9F83ACC</Checksum>
       </Template>
       <Template>
-        <Name>app.h</Name>
-        <Path>Header Files/app</Path>
-      </Template>
-      <Template>
         <Name>system_tasks.c</Name>
         <Path>Source Files/app/system_config/default</Path>
-        <Checksum>0845AFA23ECE842283ADD49BE0AAFD82</Checksum>
+        <Checksum>4EDD92B0F0B4D1547B209F75EC59D8CC</Checksum>
+      </Template>
+      <Template>
+        <Name>app_wifly.h</Name>
+        <Path>Header Files/app</Path>
       </Template>
       <Template>
         <Name>FreeRTOSConfig.h</Name>
@@ -198,23 +202,19 @@
         <Checksum>FDBB664E0B101962870068FF98301087</Checksum>
       </Template>
       <Template>
-        <Name>app.c</Name>
-        <Path>Source Files/app</Path>
-      </Template>
-      <Template>
         <Name>system_init.c</Name>
         <Path>Source Files/app/system_config/default</Path>
-        <Checksum>D2DB2FD8FE816AFCC4DAB84FBABE5F95</Checksum>
+        <Checksum>7D57BB82023FDBE4290925CEB5101717</Checksum>
       </Template>
       <Template>
         <Name>system_interrupt_a.S</Name>
         <Path>Source Files/app/system_config/default</Path>
-        <Checksum>F8E29721D7D91213A568F3DC060408EC</Checksum>
+        <Checksum>39778D0E2EA4049E918F08F615B71FD5</Checksum>
       </Template>
       <Template>
         <Name>drv_usart_static.c</Name>
         <Path>Source Files/app/system_config/default/framework/driver/usart</Path>
-        <Checksum>571BB80F6B6DAC4EA6AD56EBAC504D7C</Checksum>
+        <Checksum>A9CC0DE47030C3569E5B3C749ED0C9D7</Checksum>
       </Template>
       <Template>
         <Name>sys_clk_static.c</Name>
@@ -224,7 +224,7 @@
       <Template>
         <Name>system_definitions.h</Name>
         <Path>Header Files/app/system_config/default</Path>
-        <Checksum>248DDD62BD71FFCAA54388E11C864BCB</Checksum>
+        <Checksum>D100BD33FC872923A4CA395326674153</Checksum>
       </Template>
     </Templates>
     <CompilerItems>

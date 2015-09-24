@@ -1,6 +1,6 @@
-build/default/debug/_ext/1360937237/debug.o:  \
-../src/debug.c  \
- ../src/debug.h  \
+build/default/debug/_ext/1536116519/debug.o:  \
+../src/debug/debug.c  \
+ ../src/debug/debug.h  \
 ../src/system_config/default/system_config.h  \
  ../src/system_config/default/system_definitions.h  \
  ../../../../microchip/harmony/v1_05/framework/system/common/sys_common.h  \
@@ -154,9 +154,8 @@ build/default/debug/_ext/1360937237/debug.o:  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/list.h  \
- ../src/app.h  \
+ ../src/app_wifly.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../src/timer.h  \
-../src/app1_public.h 
+ ../src/app_wifly_public.h 

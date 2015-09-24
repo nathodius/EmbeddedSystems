@@ -62,7 +62,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include <xc.h>
 #include <sys/attribs.h>
-#include "app.h"
+#include "app_wifly.h"
 #include "system_definitions.h"
 
 // *****************************************************************************
@@ -71,6 +71,67 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
   
+void IntHandlerDrvUsartInstance0(void)
+{
+
+    /* TODO: Add code to process interrupt here */
+
+    /* Clear pending interrupt */
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_2_TRANSMIT);
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_2_RECEIVE);
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_2_ERROR);
+}
+ 
+//int RXBUFFERSIZE = 100; 
+//char UART1_RXBUFFER[RXBUFFERSIZE];
+//int i = 0;
+
+void IntHandlerDrvUsartInstance1(void)
+{
+    /* UART RECEIVE INTERRUPT*/
+	if(PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_RECEIVE))
+	{
+		if(!DRV_USART1_ReceiverBufferIsEmpty()) //grab everyhting in the buffer
+		{
+			char getChar;
+			getChar = DRV_USART1_ReadByte(); // read received byte
+//			if(getChar[0] != '/0')	//check for termination
+//				app_wifly_sendmsg(3, getChar);
+//			else					//if terminate, tell the wifly app
+				app_wifly_sendEchoChar(getChar);	//was 1
+			/*
+			if(i == RXBUFFERSIZE)
+			{
+				RXBUFFERSIZE = RXBUFFERSIZE * 2;
+				char* temp = (char*)malloc(RXBUFFERSIZE * sizeof(char));
+				int j = 0;
+				while( j < i )
+				{
+					temp[j] = UART1_RXBUFFER[j];
+					j++;
+				}
+				free(UART1_RXBUFFER);
+				UART1_RXBUFFER = temp;
+			}
+			UART1_RXBUFFER[i] = DRV_USART1_ReadByte(); // read received byte
+			if(UART1_RXBUFFER[i] == '/0')
+			{
+				app_wifly_sendmsg(1, UART1_RXBUFFER);
+				//RXBUFFERSIZE = 100;
+				i = 0;
+			}
+			else
+				i++;		
+//*/			
+		}
+	}
+    /* Clear pending interrupt */
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_TRANSMIT);
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_RECEIVE);
+    PLIB_INT_SourceFlagClear(INT_ID_0, INT_SOURCE_USART_1_ERROR);
+}
+ 
+
 /*******************************************************************************
  End of File
 */

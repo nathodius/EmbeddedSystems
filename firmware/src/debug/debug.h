@@ -3,6 +3,7 @@
  * Author: lucun_000
  *
  * //NOTE THAT MAX BAUD RATE FOR DIGIVIEW ACCURATE READS IS 57.6kHz
+ * This entire header file can be public.
  * Created on September 17, 2015, 8:01 AM
  */
 
@@ -21,8 +22,12 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+
+///*
 	void debugCharInit();
 	void debugChar(int asciiLetter);
+//*/
+
 	void initDebugU();
 	void debugU(char* debugMessage);
 
@@ -32,4 +37,3 @@ extern "C" {
 #endif
 
 #endif	/* DEBUG_H */
-
