@@ -18,11 +18,15 @@ void app_wifly_sendmsg(int type, char* string)
 	{
 		xQueueSend(appData.theQueue, (void*)&(theMessage), portMAX_DELAY);	
 	}
+    else
+        crash("could not send message");
 }
 void app_wifly_sendEchoChar(char theChar)
 {
 	if(appData.theQueue != 0)
 		xQueueSendFromISR(appData.theQueue, (void*)&(theChar), 0);	
+    else
+        crash("could not echo back char over wifly");
 }
 
 void app_wifly_UartTx( char* string )
@@ -69,10 +73,10 @@ void APP_WIFLY_Initialize ( void )
 	char test = ' ';
 	appData.rxBufferSize = 100;
 //	appData.rxBuffer;
-	appData.theQueue = xQueueCreate(10, sizeof(char)); //sizeof(appData.rxMessage));
+	appData.theQueue = xQueueCreate(10, sizeof(char)); //sizeof(appData.rxMessage))
 	if(appData.theQueue == 0)
 	{
-		//failed to create queue
+		crash("failed to create wifly message queue");
 	}
 	DRV_USART1_Initialize();
 }
@@ -87,65 +91,65 @@ void APP_WIFLY_Tasks ( void )
 		//check if queue exists
 		if(appData.theQueue != 0)	
 		{
-			//receive a message and store into rxMessage ... block 5 ticks if empty queue
-			if(xQueuePeek(appData.theQueue, &(appData.rxChar), portMAX_DELAY ))
-			{
-				xQueueReceive(appData.theQueue, &(appData.rxChar), portMAX_DELAY );
-				//received messageQ message will tell use the state which will be used
-				//##appData.state = appData.rxMessage.type;
-				appData.state = 2;
-				
-				//run the state according to the message's state
-				switch ( appData.state )
-				{
-					/* Application's initial state. */
-					case APP_STATE_INIT:	//0
-						break;
+            //receive a message and store into rxMessage ... block 5 ticks if empty queue
+            if (xQueueReceive(appData.theQueue, &(appData.rxChar), portMAX_DELAY ) != pdTRUE)
+            {
+                crash("issue receiving message in wifly thread");
+            }
+            //received messageQ message will tell use the state which will be used
+            //##appData.state = appData.rxMessage.type;
+            appData.state = 2;
 
-					case APP_STATE_READ:	//1
-					{
-						debugU("Read");
-						debugChar(0x0F);
-						app_wifly_UartRx();
-						appData.state = 0;
-						app_wifly_sendmsg(2,appData.rxBuffer);
-						appData.rxMessage.type = 0;
-						appData.rxMessage.string = "";
-						break;
-					}
+            //run the state according to the message's state
+            switch ( appData.state )
+            {
+                /* Application's initial state. */
+                case APP_STATE_INIT:	//0
+                    break;
 
-					case APP_STATE_WRITE:	//2
-					{
-						debugU("Write");
-						debugChar(0xF0);
-						app_wifly_UartTxChar(appData.rxChar);
-						appData.state = 0;
-						appData.rxMessage.type = 0;
-						appData.rxMessage.string = "";
-						//appData.rxChar = ' ';
-						break;
-					}
-					case APP_STATE_RECEIVE:	//3
-					{
-						debugU("Receiving");
-						debugChar(appData.rxBufferIndex);
-						if(appData.rxBufferIndex < appData.rxBufferSize)	//if we are within buffer bounds, copy char
-							appData.rxBuffer[appData.rxBufferIndex] = appData.rxMessage.string[0];
-						appData.rxBufferIndex++;
-						appData.state = 0;
-						appData.rxMessage.type = 0;
-						appData.rxMessage.string = "";
-						break;
-					}
+                case APP_STATE_READ:	//1
+                {
+                    debugU("Read");
+                    debugChar(0x0F);
+                    app_wifly_UartRx();
+                    appData.state = 0;
+                    app_wifly_sendmsg(2,appData.rxBuffer);
+                    appData.rxMessage.type = 0;
+                    appData.rxMessage.string = "";
+                    break;
+                }
 
-					/* The default state should never be executed. */
-					default:
-					{
-						/* TODO: Handle error in application's state machine. */
-						break;
-					}
-				}//end of case
-			}//end of receive message
+                case APP_STATE_WRITE:	//2
+                {
+                    debugU("Write");
+                    debugChar(0xF0);
+                    app_wifly_UartTxChar(appData.rxChar);
+                    appData.state = 0;
+                    appData.rxMessage.type = 0;
+                    appData.rxMessage.string = "";
+                    //appData.rxChar = ' ';
+                    break;
+                }
+                case APP_STATE_RECEIVE:	//3
+                {
+                    debugU("Receiving");
+                    debugChar(appData.rxBufferIndex);
+                    if(appData.rxBufferIndex < appData.rxBufferSize)	//if we are within buffer bounds, copy char
+                        appData.rxBuffer[appData.rxBufferIndex] = appData.rxMessage.string[0];
+                    appData.rxBufferIndex++;
+                    appData.state = 0;
+                    appData.rxMessage.type = 0;
+                    appData.rxMessage.string = "";
+                    break;
+                }
+
+                /* The default state should never be executed. */
+                default:
+                {
+                    /* TODO: Handle error in application's state machine. */
+                    break;
+                }
+            }//end of case
 		}//end of check message queue != 0
 		else	//attempt to create the queue again if it doesn't exist
 		{

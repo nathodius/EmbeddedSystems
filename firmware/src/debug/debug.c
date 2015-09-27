@@ -42,3 +42,11 @@ void debugU(char* debugMessage)
 	}		
 }
 
+void crash(char* debugMessage)
+{
+    while(1)
+    {
+        debugU(debugMessage);
+    }
+}
+

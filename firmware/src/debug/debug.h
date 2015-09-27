@@ -30,6 +30,8 @@ extern "C" {
 
 	void initDebugU();
 	void debugU(char* debugMessage);
+    
+    void crash(char* debugMessage);
 
 
 #ifdef	__cplusplus
