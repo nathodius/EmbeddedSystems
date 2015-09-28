@@ -154,9 +154,10 @@ build/default/production/_ext/1688732426/system_exceptions.o:  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/list.h  \
- ../src/app_wifly.h  \
+ ../src/rovercomm.h  \
 ../src/system_config/default/system_definitions.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../src/app_wifly_public.h 
+ ../src/roverComm_public.h  \
+../src/sensorcomm.h 

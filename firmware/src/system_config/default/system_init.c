@@ -190,7 +190,8 @@ void SYS_Initialize ( void* data )
     /* Initialize Middleware */
 
     /* Initialize the Application */
-    APP_WIFLY_Initialize();
+    ROVERCOMM_Initialize();
+    SENSORCOMM_Initialize();
 }
 
 

@@ -153,8 +153,9 @@ build/default/production/_ext/639803181/sys_clk_static.o:  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/list.h  \
- ../src/app_wifly.h  \
+ ../src/rovercomm.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../src/app_wifly_public.h 
+ ../src/roverComm_public.h  \
+../src/sensorcomm.h 

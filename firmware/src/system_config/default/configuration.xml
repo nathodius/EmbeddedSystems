@@ -15,16 +15,16 @@
         <Path>Header Files/FreeRTOS</Path>
       </File>
       <File>
-        <Name>sys_common.h</Name>
-        <Path>Header Files/framework/system/common</Path>
+        <Name>projdefs.h</Name>
+        <Path>Header Files/FreeRTOS</Path>
       </File>
       <File>
         <Name>list.c</Name>
         <Path>Source Files/FreeRTOS</Path>
       </File>
       <File>
-        <Name>projdefs.h</Name>
-        <Path>Header Files/FreeRTOS</Path>
+        <Name>sys_common.h</Name>
+        <Path>Header Files/framework/system/common</Path>
       </File>
       <File>
         <Name>portable.h</Name>
@@ -39,16 +39,16 @@
         <Path>Source Files/framework/system/ports/src</Path>
       </File>
       <File>
-        <Name>tasks.c</Name>
-        <Path>Source Files/FreeRTOS</Path>
+        <Name>ISR_Support.h</Name>
+        <Path>Header Files/FreeRTOS/portable/MPLAB/PIC32MX</Path>
       </File>
       <File>
         <Name>port.c</Name>
         <Path>Source Files/FreeRTOS/portable/MPLAB/PIC32MX</Path>
       </File>
       <File>
-        <Name>ISR_Support.h</Name>
-        <Path>Header Files/FreeRTOS/portable/MPLAB/PIC32MX</Path>
+        <Name>tasks.c</Name>
+        <Path>Source Files/FreeRTOS</Path>
       </File>
       <File>
         <Name>event_groups.c</Name>
@@ -123,12 +123,12 @@
         <Path>Source Files/FreeRTOS/portable/MemMang</Path>
       </File>
       <File>
-        <Name>sys_int_pic32.c</Name>
-        <Path>Source Files/framework/system/int/src</Path>
-      </File>
-      <File>
         <Name>FreeRTOS.h</Name>
         <Path>Header Files/FreeRTOS</Path>
+      </File>
+      <File>
+        <Name>sys_int_pic32.c</Name>
+        <Path>Source Files/framework/system/int/src</Path>
       </File>
       <File>
         <Name>sys_devcon_pic32mx.c</Name>
@@ -169,13 +169,9 @@
         <Checksum>669225D396341B82A10C79ADF6FE4C2B</Checksum>
       </Template>
       <Template>
-        <Name>app_wifly.c</Name>
-        <Path>Source Files/app</Path>
-      </Template>
-      <Template>
         <Name>system_interrupt.c</Name>
         <Path>Source Files/app/system_config/default</Path>
-        <Checksum>B54715AC9F865179792D898171527612</Checksum>
+        <Checksum>24D99F34B0047CB17C1555C9FA7E544E</Checksum>
       </Template>
       <Template>
         <Name>sys_ports_static.c</Name>
@@ -190,11 +186,7 @@
       <Template>
         <Name>system_tasks.c</Name>
         <Path>Source Files/app/system_config/default</Path>
-        <Checksum>4EDD92B0F0B4D1547B209F75EC59D8CC</Checksum>
-      </Template>
-      <Template>
-        <Name>app_wifly.h</Name>
-        <Path>Header Files/app</Path>
+        <Checksum>E57D340F9A3EB6EC95B3FEF36E276445</Checksum>
       </Template>
       <Template>
         <Name>FreeRTOSConfig.h</Name>
@@ -202,14 +194,26 @@
         <Checksum>FDBB664E0B101962870068FF98301087</Checksum>
       </Template>
       <Template>
+        <Name>roverComm.c</Name>
+        <Path>Source Files/app</Path>
+      </Template>
+      <Template>
+        <Name>roverComm.h</Name>
+        <Path>Header Files/app</Path>
+      </Template>
+      <Template>
         <Name>system_init.c</Name>
         <Path>Source Files/app/system_config/default</Path>
-        <Checksum>7D57BB82023FDBE4290925CEB5101717</Checksum>
+        <Checksum>5034EC9294EDE2E298FC223BCC7119E5</Checksum>
       </Template>
       <Template>
         <Name>system_interrupt_a.S</Name>
         <Path>Source Files/app/system_config/default</Path>
         <Checksum>39778D0E2EA4049E918F08F615B71FD5</Checksum>
+      </Template>
+      <Template>
+        <Name>sensorComm.h</Name>
+        <Path>Header Files/app</Path>
       </Template>
       <Template>
         <Name>drv_usart_static.c</Name>
@@ -224,7 +228,11 @@
       <Template>
         <Name>system_definitions.h</Name>
         <Path>Header Files/app/system_config/default</Path>
-        <Checksum>D100BD33FC872923A4CA395326674153</Checksum>
+        <Checksum>D7C72EA4425EA62DFA684E9BE429DEC6</Checksum>
+      </Template>
+      <Template>
+        <Name>sensorComm.c</Name>
+        <Path>Source Files/app</Path>
       </Template>
     </Templates>
     <CompilerItems>

@@ -154,8 +154,11 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/mpu_wrappers.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/list.h  \
+ ../src/rovercomm.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/timers.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/queue.h  \
- ../src/app_wifly_public.h  \
+ ../src/roverComm_public.h  \
+../src/sensorcomm.h  \
+../src/app_wifly_public.h  \
  ../src/system_config/default/system_definitions.h 

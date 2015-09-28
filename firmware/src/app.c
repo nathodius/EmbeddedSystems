@@ -1,3 +1,5 @@
+// mapping and control threads are 1
+
 /*******************************************************************************
   MPLAB Harmony Application Source File
   

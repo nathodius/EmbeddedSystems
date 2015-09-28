@@ -1,6 +1,6 @@
-build/default/production/_ext/1360937237/app.o:  \
-../src/app.c  \
-../src/app.h  \
+build/default/production/_ext/1360937237/sensorComm.o:  \
+ ../src/sensorComm.c  \
+../src/sensorcomm.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/system_definitions.h  \
  ../../../../microchip/harmony/v1_05/framework/system/common/sys_common.h  \
@@ -159,6 +159,4 @@ build/default/production/_ext/1360937237/app.o:  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/task.h  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../src/roverComm_public.h  \
-../src/sensorcomm.h  \
-../src/timer.h  \
- ../src/app1_public.h 
+../src/sensorcomm.h 

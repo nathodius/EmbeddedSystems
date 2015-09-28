@@ -54,7 +54,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "system_config.h"
 #include "system_definitions.h"
-#include "app_wifly.h"
+#include "rovercomm.h"
+#include "sensorcomm.h"
 
 
 // *****************************************************************************
@@ -64,7 +65,8 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
  
 static void _SYS_Tasks ( void );
-static void _APP_WIFLY_Tasks(void);
+static void _ROVERCOMM_Tasks(void);
+static void _SENSORCOMM_Tasks(void);
 
 
 // *****************************************************************************
@@ -88,9 +90,14 @@ void SYS_Tasks ( void )
                 "Sys Tasks",
                 1024, NULL, 1, NULL);
 
-    /* Create OS Thread for APP_WIFLY Tasks. */
-    xTaskCreate((TaskFunction_t) _APP_WIFLY_Tasks,
-                "APP_WIFLY Tasks",
+    /* Create OS Thread for ROVERCOMM Tasks. */
+    xTaskCreate((TaskFunction_t) _ROVERCOMM_Tasks,
+                "ROVERCOMM Tasks",
+                1024, NULL, 1, NULL);
+
+    /* Create OS Thread for SENSORCOMM Tasks. */
+    xTaskCreate((TaskFunction_t) _SENSORCOMM_Tasks,
+                "SENSORCOMM Tasks",
                 1024, NULL, 1, NULL);
 
     /**************
@@ -127,17 +134,35 @@ static void _SYS_Tasks ( void )
 
 /*******************************************************************************
   Function:
-    void _APP_WIFLY_Tasks ( void )
+    void _ROVERCOMM_Tasks ( void )
 
   Summary:
-    Maintains state machine of APP_WIFLY.
+    Maintains state machine of ROVERCOMM.
 */
 
-static void _APP_WIFLY_Tasks(void)
+static void _ROVERCOMM_Tasks(void)
 {
     while(1)
     {
-        APP_WIFLY_Tasks();
+        ROVERCOMM_Tasks();
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+
+/*******************************************************************************
+  Function:
+    void _SENSORCOMM_Tasks ( void )
+
+  Summary:
+    Maintains state machine of SENSORCOMM.
+*/
+
+static void _SENSORCOMM_Tasks(void)
+{
+    while(1)
+    {
+        SENSORCOMM_Tasks();
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }

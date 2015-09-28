@@ -91,7 +91,7 @@ void IntHandlerDrvUsartInstance1(void)
     /* UART RECEIVE INTERRUPT*/
 	if(PLIB_INT_SourceFlagGet(INT_ID_0, INT_SOURCE_USART_1_RECEIVE))
 	{
-		if(!DRV_USART1_ReceiverBufferIsEmpty()) //grab everyhting in the buffer
+		while(!DRV_USART1_ReceiverBufferIsEmpty()) //grab everyhting in the buffer
 		{
 			char getChar;
 			getChar = DRV_USART1_ReadByte(); // read received byte
@@ -99,6 +99,7 @@ void IntHandlerDrvUsartInstance1(void)
 //				app_wifly_sendmsg(3, getChar);
 //			else					//if terminate, tell the wifly app
 				app_wifly_sendEchoChar(getChar);	//was 1
+                
 			/*
 			if(i == RXBUFFERSIZE)
 			{

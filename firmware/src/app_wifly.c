@@ -1,3 +1,4 @@
+// communication with the rover
 
 #include "app_wifly.h"
 //#include "app_wifly_public.h"
@@ -9,18 +10,6 @@ APP_DATA appData;
 // Section: Application Local Functions
 // *****************************************************************************
 
-void app_wifly_sendmsg(int type, char* string)
-{
-	APP_WIFLY_MESSAGE theMessage;
-	theMessage.type = type;
-	theMessage.string = string;
-	if(appData.theQueue != 0)
-	{
-		xQueueSend(appData.theQueue, (void*)&(theMessage), portMAX_DELAY);	
-	}
-    else
-        crash("could not send message"); 
-}
 void app_wifly_sendEchoChar(char theChar)
 {
 	if(appData.theQueue != 0)
@@ -39,6 +28,13 @@ void app_wifly_UartTx( char* string )
 		DRV_USART1_WriteByte(getChar);
 		i++;
 	}		
+}
+
+
+
+void app_wifly_sendMsg()
+{
+    
 }
 
 ////####################
