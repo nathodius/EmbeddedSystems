@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/tasks.c</file>
-            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/system_config/default/system_interrupt.c</file>
-            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/system_config/default/system_exceptions.c</file>
-            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/app_wifly.c</file>
-            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/app_wifly.h</file>
-            <file>file:/C:/microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/queue.h</file>
-            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/src/app_wifly_public.h</file>
-            <file>file:/C:/MPLABXProj/8Bit_robiny/firmware/8Bit_robiny.X/nbproject/Makefile-default.mk</file>
+            <file>file:/Users/Nate/EmbeddedSystems/firmware/src/system_config/default/rtos_hooks.c</file>
+            <file>file:/Users/Nate/EmbeddedSystems/firmware/src/system_config/default/framework/system/ports/src/sys_ports_static.c</file>
+            <file>file:/Users/Nate/EmbeddedSystems/firmware/8Bit_robiny.X/nbproject/Makefile-default.mk</file>
+            <file>file:/Users/Nate/EmbeddedSystems/firmware/src/main.c</file>
+            <file>file:/Users/Nate/EmbeddedSystems/firmware/src/system_config/default/system_interrupt_a.S</file>
+            <file>file:/Users/Nate/EmbeddedSystems/firmware/src/system_config/default/system_interrupt.c</file>
         </group>
     </open-files>
 </project-private>

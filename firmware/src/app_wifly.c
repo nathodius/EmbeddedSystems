@@ -19,7 +19,7 @@ void app_wifly_sendmsg(int type, char* string)
 		xQueueSend(appData.theQueue, (void*)&(theMessage), portMAX_DELAY);	
 	}
     else
-        crash("could not send message");
+        crash("could not send message"); 
 }
 void app_wifly_sendEchoChar(char theChar)
 {
