@@ -31,7 +31,7 @@
 #ifndef XC_HEADER_TEMPLATE_H
 #define	XC_HEADER_TEMPLATE_H
 
-#include <xc.h> // include processor files - each processor file is guarded.  
+#include <xc.h> // include processor files - each processor file is guarded. 
 
 // TODO Insert appropriate #include <>
 
@@ -70,8 +70,8 @@ extern "C" {
     // TODO If C++ is being used, regular C code needs function names to have C 
     // linkage so the functions can be used by the c code.
     
-    char sendToController(int command, int durration);
-    char sendToController_ISR(int command, int durration);
+char sendToRover(int command, int durration);
+//char sendToRoverr_ISR(int command, int duration);
 
 #ifdef	__cplusplus
 }

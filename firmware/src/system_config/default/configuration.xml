@@ -15,16 +15,16 @@
         <Path>Header Files/FreeRTOS</Path>
       </File>
       <File>
-        <Name>projdefs.h</Name>
-        <Path>Header Files/FreeRTOS</Path>
+        <Name>sys_common.h</Name>
+        <Path>Header Files/framework/system/common</Path>
       </File>
       <File>
         <Name>list.c</Name>
         <Path>Source Files/FreeRTOS</Path>
       </File>
       <File>
-        <Name>sys_common.h</Name>
-        <Path>Header Files/framework/system/common</Path>
+        <Name>projdefs.h</Name>
+        <Path>Header Files/FreeRTOS</Path>
       </File>
       <File>
         <Name>portable.h</Name>
@@ -39,16 +39,16 @@
         <Path>Source Files/framework/system/ports/src</Path>
       </File>
       <File>
-        <Name>ISR_Support.h</Name>
-        <Path>Header Files/FreeRTOS/portable/MPLAB/PIC32MX</Path>
+        <Name>tasks.c</Name>
+        <Path>Source Files/FreeRTOS</Path>
       </File>
       <File>
         <Name>port.c</Name>
         <Path>Source Files/FreeRTOS/portable/MPLAB/PIC32MX</Path>
       </File>
       <File>
-        <Name>tasks.c</Name>
-        <Path>Source Files/FreeRTOS</Path>
+        <Name>ISR_Support.h</Name>
+        <Path>Header Files/FreeRTOS/portable/MPLAB/PIC32MX</Path>
       </File>
       <File>
         <Name>event_groups.c</Name>
@@ -123,12 +123,12 @@
         <Path>Source Files/FreeRTOS/portable/MemMang</Path>
       </File>
       <File>
-        <Name>FreeRTOS.h</Name>
-        <Path>Header Files/FreeRTOS</Path>
-      </File>
-      <File>
         <Name>sys_int_pic32.c</Name>
         <Path>Source Files/framework/system/int/src</Path>
+      </File>
+      <File>
+        <Name>FreeRTOS.h</Name>
+        <Path>Header Files/FreeRTOS</Path>
       </File>
       <File>
         <Name>sys_devcon_pic32mx.c</Name>
@@ -226,13 +226,13 @@
         <Checksum>A6E9E4C7092911C2F2016868A6A0527E</Checksum>
       </Template>
       <Template>
+        <Name>sensorComm.c</Name>
+        <Path>Source Files/app</Path>
+      </Template>
+      <Template>
         <Name>system_definitions.h</Name>
         <Path>Header Files/app/system_config/default</Path>
         <Checksum>D7C72EA4425EA62DFA684E9BE429DEC6</Checksum>
-      </Template>
-      <Template>
-        <Name>sensorComm.c</Name>
-        <Path>Source Files/app</Path>
       </Template>
     </Templates>
     <CompilerItems>

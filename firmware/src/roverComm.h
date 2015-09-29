@@ -51,6 +51,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "FreeRTOS.h"
 #include "timers.h"
 #include "queue.h"
+#include "roverComm_public.h"
 
 #ifndef _ROVERCOMM_H
 #define _ROVERCOMM_H
@@ -60,14 +61,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
-
-#include <stdint.h>
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdlib.h>
-#include "system_config.h"
-#include "system_definitions.h"
-#include "roverComm_public.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -89,8 +82,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 typedef enum
 {
 	ROVERCOMM_STATE_INIT=0,
-    ROVERCOMM_STATE_RXCHAR = 1,
-    ROVERCOMM_STATE_FULLBUF = 2
+    ROVERCOMM_STATE_TXCHAR = 1,
+    ROVERCOMM_STATE_RXCHAR = 2,
+    ROVERCOMM_STATE_FULLBUF = 3
 } ROVERCOMM_STATES;
 
 typedef struct
@@ -100,6 +94,14 @@ typedef struct
     int command; // string 
     int durration;
 } ROVERCOMM_MSG;
+
+typedef struct
+{
+    char msgOrigin;
+    char sequenceNumber;
+    int leftFeedback; // string 
+    int rightFeedback;
+} ROVERFEEDBACK_MSG;
 
 // *****************************************************************************
 /* Application Data
@@ -120,14 +122,17 @@ typedef struct
     ROVERCOMM_STATES state;
 
     /* TODO: Define any additional data used by the application. */
-    QueueHandle_t msgQueue;
+    QueueHandle_t txQueue;
+    char txChar;
+    QueueHandle_t rxQueue;
     char rxChar;
-    char bufferedMsg[10];
-    ROVERCOMM_MSG completeMsg;
+    char commandBuffer[10];
+    char wiflyBuffer[10];
+    ROVERCOMM_MSG roverMsg;
+    ROVERFEEDBACK_MSG roverFeedback;
     char sequenceNumberTx;
     char sequenceNumberRx;
 } ROVERCOMM_DATA;
-
 
 // *****************************************************************************
 // *****************************************************************************
@@ -137,6 +142,8 @@ typedef struct
 /* These routines are called by drivers when certain events occur.
 */
 
+void sendToRxQueueFromUART(char data);
+void receiveFromTxQueueFromUART ();
 	
 // *****************************************************************************
 // *****************************************************************************

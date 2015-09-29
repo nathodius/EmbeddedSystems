@@ -1,6 +1,6 @@
 build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../src/system_config/default/system_interrupt.c  \
-../src/app_wifly.h  \
+../src/roverComm.h  \
  ../src/system_config/default/system_config.h  \
  ../src/system_config/default/system_definitions.h  \
  ../../../../microchip/harmony/v1_05/framework/system/common/sys_common.h  \
@@ -160,5 +160,4 @@ build/default/production/_ext/1688732426/system_interrupt.o:  \
  ../../../../microchip/harmony/v1_05/third_party/rtos/FreeRTOS/Source/include/queue.h  \
  ../src/roverComm_public.h  \
 ../src/sensorcomm.h  \
-../src/app_wifly_public.h  \
  ../src/system_config/default/system_definitions.h 
