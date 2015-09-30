@@ -172,8 +172,7 @@ char sendToRover_ISR(int command, int duration)
 
 void sendToRxQueue_UART( char data )
 {
-    char getChar = DRV_USART1_ReadByte(); // read received byte
-    xQueueSend(rovercommData.rxQueue, (void *)&(getChar), 0);
+    xQueueSendFromISR(rovercommData.rxQueue, (void *)&(data), 0);
 }
 
 /*
@@ -229,11 +228,13 @@ void clearLastFeedbackMsg()
 void ROVERCOMM_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
-    rovercommData.state = ROVERCOMM_STATE_TXCHAR;
+    rovercommData.state = ROVERCOMM_STATE_RXCHAR;
     
     // Initialize App data. 
     
     rovercommData.rxQueue = xQueueCreate(10, sizeof(char)); // UART queues data by byte (char).
+    
+    
     if ( rovercommData.rxQueue == 0 ) // The queue was not initialized.
     {
         crash("roverComm task message queue not initialized.");
@@ -251,6 +252,14 @@ void ROVERCOMM_Initialize ( void )
     
     rovercommData.sequenceNumberTx = 0x00;
     rovercommData.sequenceNumberRx = 0x00;
+    
+    //if ( xQueueReceive(rovercommData.rxQueue, &(rovercommData.rxChar), portMAX_DELAY ) != pdTRUE )
+    //{
+        xQueueReset(rovercommData.rxQueue);
+        xQueueReset(rovercommData.txQueue);
+    //}
+        
+    DRV_USART1_Initialize();
 }
 
 
@@ -274,39 +283,57 @@ void ROVERCOMM_Tasks ( void )
                 /* Application's initial state. */
                 case ROVERCOMM_STATE_TXCHAR:
                 {
-                    if ( xQueueReceive(rovercommData.txQueue, &(rovercommData.txChar), portMAX_DELAY ) != pdTRUE )
+                    
+                    if ( uxQueueMessagesWaiting(rovercommData.txQueue) == 0 )
                     {
                         rovercommData.state = ROVERCOMM_STATE_RXCHAR;
+                    }
+                    
+                    if ( xQueueReceive(rovercommData.txQueue, &(rovercommData.txChar), 0 ) != pdTRUE ) // portMAX_DELAY
+                    {
+                        //rovercommData.state = ROVERCOMM_STATE_RXCHAR;
                         break;
                     }
 
                     rovercommData.sequenceNumberTx++;
 
                     DRV_USART1_WriteByte(rovercommData.txChar);
-                    
-                    rovercommData.state = ROVERCOMM_STATE_RXCHAR;
-                    
+                                        
                     break;
                 }
                 
                 case ROVERCOMM_STATE_RXCHAR:
                 {
-                    if ( xQueueReceive(rovercommData.rxQueue, &(rovercommData.rxChar), portMAX_DELAY ) != pdTRUE )
+                    if ( uxQueueMessagesWaiting(rovercommData.rxQueue) == 0 )
                     {
-                        rovercommData.state = ROVERCOMM_STATE_TXCHAR;
+                        //rovercommData.state = ROVERCOMM_STATE_RXCHAR;
+                        break;
+                    }
+                    
+                    if ( xQueueReceive(rovercommData.rxQueue, &(rovercommData.rxChar), 0 ) != pdTRUE )
+                    {
+                        //rovercommData.state = ROVERCOMM_STATE_TXCHAR;
+                        //rovercommData.state = ROVERCOMM_STATE_RXCHAR;
+                        break;
                     }
 
-                    rovercommData.wiflyBuffer[rovercommData.sequenceNumberRx] = rovercommData.rxChar;
-                    rovercommData.sequenceNumberRx++;
+                    //debugU(rovercommData.rxChar);
+                    
+                    //rovercommData.wiflyBuffer[rovercommData.sequenceNumberRx] = rovercommData.rxChar;
+                    //rovercommData.sequenceNumberRx++;
 
-                    if ( rovercommData.sequenceNumberRx == 10 ) // There is a full buffer
-                    {
-                       rovercommData.state = ROVERCOMM_STATE_FULLBUF;
-                    }
-                    else
-                    {
-                       rovercommData.state = ROVERCOMM_STATE_TXCHAR; 
-                    }
+                    //if ( rovercommData.sequenceNumberRx == 10 ) // There is a full buffer
+                    //{
+                       //rovercommData.state = ROVERCOMM_STATE_FULLBUF;
+                    //}
+                    //else
+                    //{
+                       //rovercommData.state = ROVERCOMM_STATE_TXCHAR; 
+                    //}
+                    
+                    // Simulate receiving a command from somewhere else
+                    xQueueSend(rovercommData.txQueue, (void*)&(rovercommData.rxChar), 0);
+                    rovercommData.state = ROVERCOMM_STATE_TXCHAR;
                     
                     break;
                 }
@@ -323,7 +350,7 @@ void ROVERCOMM_Tasks ( void )
                     clearWiflyBuffer();
                     //clearLastRoverMsg();
 
-                    rovercommData.state = ROVERCOMM_STATE_TXCHAR;
+                    //rovercommData.state = ROVERCOMM_STATE_TXCHAR;
                     
                     // do something with the feedback from the rover
                     debugU(rovercommData.roverFeedback.msgOrigin);

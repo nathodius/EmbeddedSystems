@@ -50,7 +50,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_config.h"
 #include "system_definitions.h"
 
-
 // ****************************************************************************
 // ****************************************************************************
 // Section: Configuration Bits
@@ -192,6 +191,8 @@ void SYS_Initialize ( void* data )
     /* Initialize the Application */
     ROVERCOMM_Initialize();
     SENSORCOMM_Initialize();
+    
+    //debugCharInit();
 }
 
 
