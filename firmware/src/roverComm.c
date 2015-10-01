@@ -252,13 +252,7 @@ void ROVERCOMM_Initialize ( void )
     
     rovercommData.sequenceNumberTx = 0x00;
     rovercommData.sequenceNumberRx = 0x00;
-    
-    //if ( xQueueReceive(rovercommData.rxQueue, &(rovercommData.rxChar), portMAX_DELAY ) != pdTRUE )
-    //{
-        xQueueReset(rovercommData.rxQueue);
-        xQueueReset(rovercommData.txQueue);
-    //}
-        
+
     DRV_USART1_Initialize();
 }
 
@@ -284,14 +278,13 @@ void ROVERCOMM_Tasks ( void )
                 case ROVERCOMM_STATE_TXCHAR:
                 {
                     
-                    if ( uxQueueMessagesWaiting(rovercommData.txQueue) == 0 )
+                    if ( uxQueueMessagesWaiting(rovercommData.rxQueue) > 0 )
                     {
                         rovercommData.state = ROVERCOMM_STATE_RXCHAR;
                     }
                     
                     if ( xQueueReceive(rovercommData.txQueue, &(rovercommData.txChar), 0 ) != pdTRUE ) // portMAX_DELAY
                     {
-                        //rovercommData.state = ROVERCOMM_STATE_RXCHAR;
                         break;
                     }
 
@@ -304,10 +297,9 @@ void ROVERCOMM_Tasks ( void )
                 
                 case ROVERCOMM_STATE_RXCHAR:
                 {
-                    if ( uxQueueMessagesWaiting(rovercommData.rxQueue) == 0 )
+                    if ( uxQueueMessagesWaiting(rovercommData.txQueue) != 0 )
                     {
-                        //rovercommData.state = ROVERCOMM_STATE_RXCHAR;
-                        break;
+                       rovercommData.state = ROVERCOMM_STATE_TXCHAR;
                     }
                     
                     if ( xQueueReceive(rovercommData.rxQueue, &(rovercommData.rxChar), 0 ) != pdTRUE )
@@ -316,24 +308,20 @@ void ROVERCOMM_Tasks ( void )
                         //rovercommData.state = ROVERCOMM_STATE_RXCHAR;
                         break;
                     }
-
-                    //debugU(rovercommData.rxChar);
                     
-                    //rovercommData.wiflyBuffer[rovercommData.sequenceNumberRx] = rovercommData.rxChar;
-                    //rovercommData.sequenceNumberRx++;
+                    // check the sequence number
 
-                    //if ( rovercommData.sequenceNumberRx == 10 ) // There is a full buffer
-                    //{
-                       //rovercommData.state = ROVERCOMM_STATE_FULLBUF;
-                    //}
-                    //else
-                    //{
-                       //rovercommData.state = ROVERCOMM_STATE_TXCHAR; 
-                    //}
+                    if( (rovercommData.sequenceNumberRx == 0x09) && (rovercommData.rxChar == 0x80) )
+                    {
+                        rovercommData.state = ROVERCOMM_STATE_FULLBUF;
+                        break;
+                    }
+                    
+                    rovercommData.wiflyBuffer[rovercommData.sequenceNumberRx] = rovercommData.rxChar;
+                    rovercommData.sequenceNumberRx++;
                     
                     // Simulate receiving a command from somewhere else
                     xQueueSend(rovercommData.txQueue, (void*)&(rovercommData.rxChar), 0);
-                    rovercommData.state = ROVERCOMM_STATE_TXCHAR;
                     
                     break;
                 }
@@ -349,12 +337,22 @@ void ROVERCOMM_Tasks ( void )
                             (rovercommData.wiflyBuffer[7] << 16) | (rovercommData.wiflyBuffer[8] << 8) | rovercommData.wiflyBuffer[9];
                     clearWiflyBuffer();
                     //clearLastRoverMsg();
-
-                    //rovercommData.state = ROVERCOMM_STATE_TXCHAR;
                     
-                    // do something with the feedback from the rover
-                    debugU(rovercommData.roverFeedback.msgOrigin);
-                    debugU(rovercommData.roverFeedback.sequenceNumber);
+                    // Prepare to receive the next message
+                    rovercommData.sequenceNumberRx = 0x00;
+                    clearWiflyBuffer();
+                    xQueueReset(rovercommData.rxQueue);
+                    
+                    
+
+                    if ( uxQueueMessagesWaiting(rovercommData.txQueue) != 0 )
+                    {
+                       rovercommData.state = ROVERCOMM_STATE_TXCHAR;
+                    }
+                    else
+                    {
+                       rovercommData.state = ROVERCOMM_STATE_RXCHAR;
+                    }
 
                     break;
                 }

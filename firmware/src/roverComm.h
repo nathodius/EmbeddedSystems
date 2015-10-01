@@ -125,7 +125,7 @@ typedef struct
     QueueHandle_t txQueue;
     char txChar;
     QueueHandle_t rxQueue;
-    char rxChar;
+    unsigned char rxChar;
     char commandBuffer[10];
     char wiflyBuffer[10];
     ROVERCOMM_MSG roverMsg;
